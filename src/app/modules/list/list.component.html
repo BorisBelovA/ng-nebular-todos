@@ -1,1 +1,35 @@
-<p>list works!</p>
+<div class="list-content">
+  <nb-card size="medium">
+    <nb-card-header>
+      <input type="text" data-id="list-header-input" #listHeaderInput nbInput fullWidth status="primary"
+        placeholder="Название списка..." 
+        [(ngModel)]="list.title">
+    </nb-card-header>
+
+    <nb-card-body>
+      <nb-list>
+        <nb-list-item *ngFor="let item of list.items">
+          <div class="list-item" [attr.data-id]="'item-'+item.id" [class.done]="item.done">
+            <span [attr.data-id]="'item-'+item.id+'__description'">{{ item.description }}</span>
+            <nb-checkbox [attr.data-id]="'checkbox_'+item.id" [(checked)]="item.done" ></nb-checkbox>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+
+    <nb-card-footer>
+      <input type="text" data-id="input" #input nbInput fullWidth status="primary" placeholder="Что нужно сделать...">
+      <div class="horizontal-delimeter"></div>
+      <button nbButton outline fullWidth status="primary"
+        data-id="add-item-btn"
+        [disabled]="!input.value"
+        (click)="addNewitem(input.value); input.value = '';">
+        Добавить запись
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</div>
+<div class="to-all-lists-btn">
+  <button nbButton outline fullWidth status="primary" data-id="back-to-all-lists"
+   (click)="backToGallery()">Вернуться ко всем спискам</button>
+</div>

@@ -1,0 +1,30 @@
+<ng-container *ngIf="items$ | async as items">
+  <ng-container *ngIf="items.length > 0 then galleryTemplate else emptyTemplate"></ng-container>
+  <div class="add-new list">
+    <button nbButton outline fullWidth status="primary" data-id="add-item-list">Новый список</button>
+  </div>
+</ng-container>
+
+<ng-template #galleryTemplate>
+  <div class="gallery">
+    <nb-card class="gallery-item">
+      <nb-card-header>Nebula</nb-card-header>
+      <nb-card-body>
+        A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+        Originally, nebula was a name for any diffuse astronomical object,
+        including galaxies beyond the Milky Way.
+      </nb-card-body>
+    </nb-card>
+  
+    <nb-card class="gallery-item">
+      <nb-card-header>Nebula</nb-card-header>
+      <nb-card-body>
+        A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+        Originally, nebula was a name for any diffuse astronomical object,
+        including galaxies beyond the Milky Way.
+      </nb-card-body>
+    </nb-card>
+  </div>
+</ng-template>
+
+<ng-template #emptyTemplate>У вас нет активных списков</ng-template>
