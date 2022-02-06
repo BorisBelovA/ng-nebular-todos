@@ -1,10 +1,29 @@
-.gallery {
+.todo-gallery {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
 
-  &-item {
-    width: 24rem;
-    margin: 1rem 0.5rem;
+.todo {
+  width: 24rem;
+  margin: 1rem 0.5rem;
+  cursor: pointer;
+
+  &-header {
+    font-weight: bold;
   }
+  
+  &-item {
+
+  }
+
+  &-item.done {
+    text-decoration: line-through;
+  }
+}
+
+[data-id='empty-todo-list-text']::after {
+  content: "👍";
+  font-size: 20px;
+  margin-left: 4px;
 }

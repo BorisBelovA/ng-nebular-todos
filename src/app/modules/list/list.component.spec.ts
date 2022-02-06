@@ -169,6 +169,8 @@ describe('ListComponent', () => {
   })
 
   describe('Нажатие на кнопку "Вернуться ко всем спискам"', () => {
+
+
     it('Должен быть вызван метод router.navigate', () => {
       const spy = spyOn(router, 'navigate');
       getElementByDataId('back-to-all-lists').nativeElement.click()

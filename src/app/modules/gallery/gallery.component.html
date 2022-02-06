@@ -1,30 +1,30 @@
 <ng-container *ngIf="items$ | async as items">
-  <ng-container *ngIf="items.length > 0 then galleryTemplate else emptyTemplate"></ng-container>
+  <ng-container *ngIf="items.length > 0">
+    <ng-container *ngTemplateOutlet="galleryTemplate; context: { $implicit: items }"></ng-container>
+  </ng-container>
+  
+  <ng-container *ngIf="items.length === 0 then emptyTemplate"></ng-container>
+
   <div class="add-new list">
-    <button nbButton outline fullWidth status="primary" data-id="add-item-list">Новый список</button>
+    <button nbButton outline fullWidth status="primary" data-id="add-item-list" (click)="newTodo()">Новый список</button>
   </div>
 </ng-container>
 
-<ng-template #galleryTemplate>
-  <div class="gallery">
-    <nb-card class="gallery-item">
-      <nb-card-header>Nebula</nb-card-header>
+<ng-template #galleryTemplate let-items >
+  <div class="todo-gallery">
+    <nb-card *ngFor="let todo of items" data-id="todo-list-card" class="todo" (click)="openTodo(todo.id)">
+      <nb-card-header><p class="todo-header" data-id="todo-lict-card-header">{{ todo.title }}</p></nb-card-header>
       <nb-card-body>
-        A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
-        Originally, nebula was a name for any diffuse astronomical object,
-        including galaxies beyond the Milky Way.
-      </nb-card-body>
-    </nb-card>
-  
-    <nb-card class="gallery-item">
-      <nb-card-header>Nebula</nb-card-header>
-      <nb-card-body>
-        A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
-        Originally, nebula was a name for any diffuse astronomical object,
-        including galaxies beyond the Milky Way.
+        <ng-container *ngFor="let item of todo.items; index as i">
+          <nb-list-item *ngIf="i < 5" >
+            <p data-id="todo-list-item" class="todo-item" [class.done]="item.done">{{ item.description }}</p>
+          </nb-list-item>
+        </ng-container>
       </nb-card-body>
     </nb-card>
   </div>
 </ng-template>
 
-<ng-template #emptyTemplate>У вас нет активных списков</ng-template>
+<ng-template #emptyTemplate>
+  <p data-id="empty-todo-list-text">Все ваши дела сделаны</p>
+</ng-template>
