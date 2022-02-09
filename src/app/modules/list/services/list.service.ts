@@ -23,7 +23,10 @@ export class ListService {
     const listMap: Map<number, TodoList> = new Map();
     this.storageService.getDataByKey<TodoList[]>('todos')?.forEach(l => listMap.set(l.id, l));
     if (Array.from(listMap.keys()).length === 0) {
-      this.storageService.setDataByKey('todos', JSON.stringify([list]))
+      this.storageService.setDataByKey('todos', JSON.stringify([{
+        ...list,
+        id: 1
+      }]))
     } else {
       if (listMap.has(list.id)) {
         listMap.set(list.id, list);
