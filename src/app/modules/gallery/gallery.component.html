@@ -1,4 +1,4 @@
-<ng-container *ngIf="items$ | async as items">
+<ng-container *ngIf="(items$ | async) as items">
   <ng-container *ngIf="items.length > 0">
     <ng-container *ngTemplateOutlet="galleryTemplate; context: { $implicit: items }"></ng-container>
   </ng-container>
@@ -15,10 +15,12 @@
     <nb-card *ngFor="let todo of items" data-id="todo-list-card" class="todo" (click)="openTodo(todo.id)">
       <nb-card-header><p class="todo-header" data-id="todo-lict-card-header">{{ todo.title }}</p></nb-card-header>
       <nb-card-body>
-        <ng-container *ngFor="let item of todo.items; index as i">
-          <nb-list-item *ngIf="i < 5" >
-            <p data-id="todo-list-item" class="todo-item" [class.done]="item.done">{{ item.description }}</p>
-          </nb-list-item>
+        <ng-container *ngIf="todo.items.length > 0; else emptyList">
+          <ng-container *ngFor="let item of todo.items; index as i">
+            <nb-list-item *ngIf="i < 5" >
+              <p data-id="todo-list-item" class="todo-item" [class.done]="item.done">{{ item.description }}</p>
+            </nb-list-item>
+          </ng-container>
         </ng-container>
       </nb-card-body>
     </nb-card>
@@ -26,5 +28,9 @@
 </ng-template>
 
 <ng-template #emptyTemplate>
-  <p data-id="empty-todo-list-text">Все ваши дела сделаны</p>
+  <p data-id="no-todos">Все ваши дела сделаны</p>
+</ng-template>
+
+<ng-template #emptyList>
+  <p data-id="empty-todo-list-text">Список пуст</p>
 </ng-template>

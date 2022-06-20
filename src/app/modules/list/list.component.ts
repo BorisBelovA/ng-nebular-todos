@@ -52,9 +52,16 @@ export class ListComponent implements OnInit {
   }
 
   public backToGallery(): void {
-    if (this.list.title && this.list.items.length > 0) {
+    if (this.list.title) {
       this.listService.saveList(this.list);
     }
     this.router.navigate(['/gallery'])
+  }
+
+  public remove(id: number): void {
+    this.list = {
+      ...this.list,
+      items: this.list.items.filter(i => i.id !== id)
+    }
   }
 }

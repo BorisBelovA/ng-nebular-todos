@@ -10,8 +10,11 @@
       <nb-list>
         <nb-list-item *ngFor="let item of list.items">
           <div class="list-item" [attr.data-id]="'item-'+item.id" [class.done]="item.done">
-            <span [attr.data-id]="'item-'+item.id+'__description'">{{ item.description }}</span>
             <nb-checkbox [attr.data-id]="'checkbox_'+item.id" [(checked)]="item.done" ></nb-checkbox>
+            <span class="description" [attr.data-id]="'item-'+item.id+'__description'">{{ item.description }}</span>
+            <div class="icon-wrapper" (click)="remove(item.id)">
+              <nb-icon class="icon" icon="trash-2-outline"></nb-icon>
+            </div>
           </div>
         </nb-list-item>
       </nb-list>

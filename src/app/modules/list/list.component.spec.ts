@@ -9,7 +9,8 @@ import {
   NbInputModule,
   NbStatusService,
   NbFocusMonitor,
-  NbLayoutModule
+  NbLayoutModule,
+  NbIconModule
 } from '@nebular/theme';
 import { RouterTestingModule } from '@angular/router/testing'
 import { of } from 'rxjs';
@@ -19,6 +20,7 @@ import { ListComponent } from './list.component';
 import { ListService } from './services/list.service';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -44,7 +46,9 @@ describe('ListComponent', () => {
         NbCheckboxModule,
         NbButtonModule,
         NbInputModule,
-        RouterTestingModule.withRoutes([])
+        RouterTestingModule.withRoutes([]),
+        NbIconModule,
+        NbEvaIconsModule
       ],
       providers: [
         { provide: ListService, useValue: listServiceSpy },
@@ -197,6 +201,16 @@ describe('ListComponent', () => {
       fixture.detectChanges()
       
       expect(listServiceSpy.saveList).toHaveBeenCalledWith(component.list);
+    })
+  })
+
+  describe('Удаление элемента из списка дел', () => {
+    it('При клике на кнопку удалить, элемент должен исчезнуть из списка', () => {
+      component.list.title = 'Тестовый список дел';
+      component.list.items = [{ id: 1, description: 'Тестовое дело', done: false }];
+      component.remove(1);
+      fixture.detectChanges();
+      expect(component.list.items.length).toEqual(0);
     })
   })
 

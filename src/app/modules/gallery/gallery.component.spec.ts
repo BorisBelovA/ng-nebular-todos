@@ -65,7 +65,7 @@ describe('GalleryComponent', () => {
       component.ngOnInit()
       fixture.detectChanges()
       expect(getAllElemtnsByDataId('todo-list-card').length).toEqual(0)
-      expect(getOneElementByDataId('empty-todo-list-text').nativeElement.innerText).toEqual('Все ваши дела сделаны')
+      expect(getOneElementByDataId('no-todos').nativeElement.innerText).toEqual('Все ваши дела сделаны')
     });
   })
 
@@ -83,24 +83,23 @@ describe('GalleryComponent', () => {
 
     it('Карточка должна содержать в перечне дел не более 5 элементов, остальные должны быть скрыты', () => {
       galleryServiceSpy.getAllTodos.and.returnValue(of([
-        ...TodoListItems,
         {
           id: 3,
           title: 'Очень длинный список',
           items: [
-            { id: 1,description: 'Купить творожок', done: false },
-            { id: 2,description: 'Купить творожок', done: false },
-            { id: 3,description: 'Купить творожок', done: false },
-            { id: 4,description: 'Купить творожок', done: false },
+            { id: 1, description: 'Купить творожок', done: false },
+            { id: 2, description: 'Купить творожок', done: false },
+            { id: 3, description: 'Купить творожок', done: false },
+            { id: 4, description: 'Купить творожок', done: false },
             { id: 5, description: 'Не видно на карточке', done: false },
-            { id: 6,description: 'Не видно на карточке', done: false },
+            { id: 6, description: 'Не видно на карточке', done: false },
           ]
         }
       ]))
       component.ngOnInit();
       fixture.detectChanges();
 
-      const card = getAllElemtnsByDataId('todo-list-card')[2];
+      const card = getAllElemtnsByDataId('todo-list-card')[0];
       const visibleItems = card.queryAll(By.css('[data-id="todo-list-item"]'));
       expect(visibleItems.length).toEqual(5)
     });

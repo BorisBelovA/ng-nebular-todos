@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListComponent } from './list.component';
 import { ListRoutingModule } from './list-routing.module';
-import { NbButtonModule, NbCardModule, NbCheckboxModule, NbInputModule, NbListModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbIconModule, NbInputModule, NbListModule } from '@nebular/theme';
 import { ListService } from './services/list.service';
 import { FormsModule } from '@angular/forms';
 
@@ -20,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     NbCardModule,
     NbCheckboxModule,
     NbButtonModule,
-    NbInputModule
+    NbInputModule,
+    NbIconModule
   ],
   providers: [
     ListService

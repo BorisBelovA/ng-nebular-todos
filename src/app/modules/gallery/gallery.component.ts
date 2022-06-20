@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TodoList } from 'src/app/models/todo-list';
 import { GalleryService } from './services/gallery.service';
 
