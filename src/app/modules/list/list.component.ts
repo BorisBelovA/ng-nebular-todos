@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { TodoList } from 'src/app/models/todo-list';
@@ -9,7 +9,7 @@ import { ListService } from './services/list.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
 
   public list: TodoList = this.newList();
 
@@ -52,9 +52,7 @@ export class ListComponent implements OnInit {
   }
 
   public backToGallery(): void {
-    if (this.list.title) {
-      this.listService.saveList(this.list);
-    }
+    this.trySaveList();
     this.router.navigate(['/gallery'])
   }
 
@@ -62,6 +60,16 @@ export class ListComponent implements OnInit {
     this.list = {
       ...this.list,
       items: this.list.items.filter(i => i.id !== id)
+    }
+  }
+
+  public ngOnDestroy(): void {
+    this.trySaveList();
+  }
+
+  private trySaveList(): void {
+    if (this.list.title) {
+      this.listService.saveList(this.list);
     }
   }
 }
