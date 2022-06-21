@@ -1,13 +1,13 @@
+<div class="add-new">
+  <button nbButton outline fullWidth status="primary" data-id="add-item-list" (click)="newTodo()">Новый список</button>
+</div>
+
 <ng-container *ngIf="(items$ | async) as items">
   <ng-container *ngIf="items.length > 0">
     <ng-container *ngTemplateOutlet="galleryTemplate; context: { $implicit: items }"></ng-container>
   </ng-container>
   
   <ng-container *ngIf="items.length === 0 then emptyTemplate"></ng-container>
-
-  <div class="add-new list">
-    <button nbButton outline fullWidth status="primary" data-id="add-item-list" (click)="newTodo()">Новый список</button>
-  </div>
 </ng-container>
 
 <ng-template #galleryTemplate let-items >

@@ -21,12 +21,12 @@
     </nb-card-body>
 
     <nb-card-footer>
-      <input type="text" data-id="input" #input nbInput fullWidth status="primary" placeholder="Что нужно сделать...">
+      <input type="text" data-id="input" nbInput [(ngModel)]="inputValue" fullWidth status="primary" placeholder="Что нужно сделать...">
       <div class="horizontal-delimeter"></div>
       <button nbButton outline fullWidth status="primary"
         data-id="add-item-btn"
-        [disabled]="!input.value"
-        (click)="addNewitem(input.value); input.value = '';">
+        [disabled]="inputValue.length === 0"
+        (click)="addNewitem()">
         Добавить запись
       </button>
     </nb-card-footer>

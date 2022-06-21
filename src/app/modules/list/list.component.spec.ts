@@ -153,7 +153,8 @@ describe('ListComponent', () => {
       spyOnRouteId('0');
       fixture.detectChanges();
 
-      getElementByDataId('input').nativeElement.value = '';
+      component.inputValue = '';
+      fixture.detectChanges();
       expect(getElementByDataId('add-item-btn').nativeElement).toHaveClass('btn-disabled');
     })
 
@@ -161,9 +162,10 @@ describe('ListComponent', () => {
       spyOnRouteId('0');
       fixture.detectChanges();
 
-      getElementByDataId('input').nativeElement.value = 'Тестовая запись';
+      component.inputValue = 'Тестовая запись';
       fixture.detectChanges();
-
+      console.log(component.inputValue);
+      
       getElementByDataId('add-item-btn').nativeElement.click()
       fixture.detectChanges()
 
@@ -182,7 +184,7 @@ describe('ListComponent', () => {
       expect(spy).toHaveBeenCalledWith(['/gallery']);
     })
 
-    it('Если к моменту возврата список был пуст и не имел названия, то метод ListService.saveList вызываться не должен', () => {
+    it('Если к моменту возврата список не имел названия, то метод ListService.saveList вызываться не должен', () => {
       spyOnRouteId('0');
       fixture.detectChanges()
       getElementByDataId('back-to-all-lists').nativeElement.click()

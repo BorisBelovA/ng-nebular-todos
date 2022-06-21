@@ -13,6 +13,8 @@ export class ListComponent implements OnInit, OnDestroy {
 
   public list: TodoList = this.newList();
 
+  public inputValue = '';
+
   constructor(
     private listService: ListService,
     private route: ActivatedRoute,
@@ -31,12 +33,13 @@ export class ListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public addNewitem(description: string): void {
+  public addNewitem(): void {
     this.list.items.push({
       id: this.list.items.length + 1,
-      description,
+      description: this.inputValue,
       done: false
     });
+    this.inputValue = '';
   }
 
   public getTodoById(listId: number): Observable<TodoList | null> {

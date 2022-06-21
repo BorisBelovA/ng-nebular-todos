@@ -1,0 +1,11 @@
+.app-header {
+  transition: transform 0.25s ease;
+}
+
+.translate-y-100 {
+  transform: translateY(100px);
+
+  &__negative {
+    transform: translateY(-100px);
+  }
+}
