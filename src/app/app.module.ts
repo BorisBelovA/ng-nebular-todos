@@ -8,8 +8,6 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LocalStorageService } from './services/local-storage.service';
 import { HideOnScrollModule } from './directives/hide-on-scroll/hide-on-scroll.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,13 +20,7 @@ import { environment } from '../environments/environment';
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbLayoutModule,
     NbEvaIconsModule,
-    HideOnScrollModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+    HideOnScrollModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent]
