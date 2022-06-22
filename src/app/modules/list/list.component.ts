@@ -55,7 +55,6 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   public backToGallery(): void {
-    this.trySaveList();
     this.router.navigate(['/gallery'])
   }
 
