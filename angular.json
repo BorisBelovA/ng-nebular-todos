@@ -138,6 +138,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ng-nebular-todos"
+  }
 }
